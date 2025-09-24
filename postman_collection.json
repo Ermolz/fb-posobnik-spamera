@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "email-mailing-api",
+		"name": "Email Mailing API",
+		"description": "API for email mailing application with Gmail integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email Addresses",
+			"item": [
+				{
+					"name": "Get All Addresses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses?sortBy=last_name&sortOrder=ASC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "last_name"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"last_name\": \"Brown\",\n    \"first_name\": \"Emma\",\n    \"middle_name\": \"Grace\",\n    \"email\": \"emma.brown@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"last_name\": \"Brown\",\n    \"first_name\": \"Emma\",\n    \"middle_name\": \"Grace\",\n    \"email\": \"emma.brown.updated@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Addresses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/email-addresses/search?last_name=Smith",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-addresses",
+								"search"
+							],
+							"query": [
+								{
+									"key": "last_name",
+									"value": "Smith"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message Templates",
+			"item": [
+				{
+					"name": "Get All Templates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/message-templates",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Template by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/message-templates/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Template",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Welcome Message\",\n    \"subject\": \"Welcome to our platform, {{first_name}}!\",\n    \"content\": \"<h1>Hello {{first_name}} {{last_name}}!</h1><p>Welcome to our community! We're excited to have you on board.</p><p>Best regards,<br>The Team</p>\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message-templates",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Template",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Welcome Message (Updated)\",\n    \"subject\": \"Welcome to our platform, {{first_name}}!\",\n    \"content\": \"<h1>Hello {{first_name}} {{last_name}}!</h1><p>Welcome to our community! We're excited to have you on board.</p><p>This is an updated version of our welcome message.</p><p>Best regards,<br>The Team</p>\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message-templates/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Template",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/message-templates/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Templates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/message-templates/search?name=Welcome",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Welcome"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Template with Placeholders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Smith\",\n    \"middle_name\": \"Michael\",\n    \"email\": \"john.smith@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message-templates/1/placeholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message-templates",
+								"1",
+								"placeholders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mailing",
+			"item": [
+				{
+					"name": "Get Addresses for Mailing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/addresses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Templates for Mailing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/templates",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Mailing with Template",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"templateId\": 1,\n    \"selectedAddresses\": [1, 2, 3]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mailing/send",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Custom Mailing",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customSubject\": \"Special Offer for You!\",\n    \"customContent\": \"<h1>Hello {{first_name}} {{last_name}}!</h1><p>We have a special offer just for you!</p><p>Get 20% off on all our products with code: SAVE20</p><p>Don't miss out!</p>\",\n    \"selectedAddresses\": [1, 2]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/mailing/send",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mailing Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/logs?limit=10&offset=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mailing Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs by Status - Sent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/logs/sent",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"logs",
+								"sent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs by Status - Failed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/logs/failed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"logs",
+								"failed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs by Status - Pending",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/logs/pending",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"logs",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cleanup Old Logs",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/mailing/logs/cleanup?daysOld=30",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"mailing",
+								"logs",
+								"cleanup"
+							],
+							"query": [
+								{
+									"key": "daysOld",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
