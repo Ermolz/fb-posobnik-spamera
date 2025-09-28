@@ -1,12 +1,10 @@
 const { EmailLog, EmailAddress, MessageTemplate } = require('../models');
 
 class EmailLogRepository {
-    // Створити запис логу
     async create(data) {
         return await EmailLog.create(data);
     }
 
-    // Оновити статус логу
     async updateStatus(id, status, error_message = null) {
         const updateData = { status };
         
@@ -25,7 +23,6 @@ class EmailLogRepository {
         return affectedRows > 0;
     }
 
-    // Отримати всі логи з пагінацією
     async findAll(options = {}) {
         const { limit = 100, offset = 0 } = options;
         
@@ -48,7 +45,6 @@ class EmailLogRepository {
         });
     }
 
-    // Отримати логи за статусом
     async findByStatus(status, options = {}) {
         const { limit = 100, offset = 0 } = options;
         
@@ -72,7 +68,6 @@ class EmailLogRepository {
         });
     }
 
-    // Отримати статистику розсилок
     async getStats() {
         const stats = await EmailLog.findAll({
             attributes: [
@@ -98,7 +93,6 @@ class EmailLogRepository {
         return result;
     }
 
-    // Отримати логи за період
     async findByDateRange(startDate, endDate, options = {}) {
         const { limit = 100, offset = 0 } = options;
         
@@ -126,7 +120,6 @@ class EmailLogRepository {
         });
     }
 
-    // Видалити старі логи
     async deleteOldLogs(daysOld = 30) {
         const cutoffDate = new Date();
         cutoffDate.setDate(cutoffDate.getDate() - daysOld);

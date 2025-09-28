@@ -6,7 +6,6 @@ class MailingDTO {
         this.selected_addresses = data.selected_addresses || [];
     }
 
-    // Валідація даних для розсилки
     static validateMailing(data) {
         const errors = [];
         
@@ -36,7 +35,6 @@ class MailingDTO {
         };
     }
 
-    // Отримати тип розсилки
     getMailingType() {
         if (this.template_id) {
             return 'template';
@@ -44,17 +42,14 @@ class MailingDTO {
         return 'custom';
     }
 
-    // Отримати кількість адрес
     getAddressCount() {
         return this.selected_addresses.length;
     }
 
-    // Перевірити чи є адреси
     hasAddresses() {
         return this.selected_addresses.length > 0;
     }
 
-    // Отримати опис розсилки
     getDescription() {
         const type = this.getMailingType();
         const count = this.getAddressCount();
@@ -66,7 +61,6 @@ class MailingDTO {
         }
     }
 
-    // Перетворити в об'єкт для API відповіді
     toJSON() {
         return {
             template_id: this.template_id,
@@ -81,7 +75,6 @@ class MailingDTO {
     }
 }
 
-// DTO для результату розсилки
 class MailingResultDTO {
     constructor(data) {
         this.total_sent = data.total_sent || 0;
@@ -92,7 +85,6 @@ class MailingResultDTO {
         this.message = data.message || '';
     }
 
-    // Додати результат для однієї адреси
     addResult(result) {
         this.results.push(result);
         if (result.status === 'sent') {
@@ -102,18 +94,15 @@ class MailingResultDTO {
         }
     }
 
-    // Отримати відсоток успішності
     getSuccessRate() {
         if (this.total_addresses === 0) return 0;
         return Math.round((this.total_sent / this.total_addresses) * 100);
     }
 
-    // Перевірити чи всі листи відправлені
     isComplete() {
         return this.total_sent + this.total_failed === this.total_addresses;
     }
 
-    // Отримати статистику
     getStats() {
         return {
             total_addresses: this.total_addresses,
@@ -124,7 +113,6 @@ class MailingResultDTO {
         };
     }
 
-    // Перетворити в об'єкт для API відповіді
     toJSON() {
         return {
             success: this.success,

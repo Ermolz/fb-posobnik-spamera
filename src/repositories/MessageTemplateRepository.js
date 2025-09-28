@@ -1,7 +1,6 @@
 const { MessageTemplate } = require('../models');
 
 class MessageTemplateRepository {
-    // Отримати всі шаблони
     async findAll(options = {}) {
         const { limit, offset } = options;
         
@@ -15,17 +14,14 @@ class MessageTemplateRepository {
         return await MessageTemplate.findAll(queryOptions);
     }
 
-    // Отримати шаблон за ID
     async findById(id) {
         return await MessageTemplate.findByPk(id);
     }
 
-    // Створити новий шаблон
     async create(data) {
         return await MessageTemplate.create(data);
     }
 
-    // Оновити шаблон
     async update(id, data) {
         const [affectedRows] = await MessageTemplate.update(data, {
             where: { id }
@@ -38,7 +34,6 @@ class MessageTemplateRepository {
         return await this.findById(id);
     }
 
-    // Видалити шаблон
     async delete(id) {
         const deletedRows = await MessageTemplate.destroy({
             where: { id }
@@ -47,7 +42,6 @@ class MessageTemplateRepository {
         return deletedRows > 0;
     }
 
-    // Пошук шаблонів за назвою
     async searchByName(name) {
         return await MessageTemplate.findAll({
             where: {
@@ -57,7 +51,6 @@ class MessageTemplateRepository {
         });
     }
 
-    // Підрахувати загальну кількість шаблонів
     async count() {
         return await MessageTemplate.count();
     }

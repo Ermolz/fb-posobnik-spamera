@@ -1,7 +1,6 @@
 const { EmailAddress } = require('../models');
 
 class EmailAddressRepository {
-    // Отримати всі адреси з опціями сортування
     async findAll(options = {}) {
         const { sortBy = 'last_name', sortOrder = 'ASC', limit, offset } = options;
         
@@ -14,17 +13,14 @@ class EmailAddressRepository {
         return await EmailAddress.findAll(queryOptions);
     }
 
-    // Отримати адресу за ID
     async findById(id) {
         return await EmailAddress.findByPk(id);
     }
 
-    // Створити нову адресу
     async create(data) {
         return await EmailAddress.create(data);
     }
 
-    // Оновити адресу
     async update(id, data) {
         const [affectedRows] = await EmailAddress.update(data, {
             where: { id }
@@ -37,7 +33,6 @@ class EmailAddressRepository {
         return await this.findById(id);
     }
 
-    // Видалити адресу
     async delete(id) {
         const deletedRows = await EmailAddress.destroy({
             where: { id }
@@ -46,7 +41,6 @@ class EmailAddressRepository {
         return deletedRows > 0;
     }
 
-    // Перевірити чи існує email
     async emailExists(email, excludeId = null) {
         const whereClause = { email };
         
@@ -58,14 +52,12 @@ class EmailAddressRepository {
         return count > 0;
     }
 
-    // Отримати всі адреси для розсилки
     async findAllForMailing() {
         return await EmailAddress.findAll({
             order: [['last_name', 'ASC'], ['first_name', 'ASC']]
         });
     }
 
-    // Пошук адрес за критеріями
     async search(criteria) {
         const { last_name, first_name, email } = criteria;
         const whereClause = {};
@@ -86,7 +78,6 @@ class EmailAddressRepository {
         });
     }
 
-    // Підрахувати загальну кількість адрес
     async count() {
         return await EmailAddress.count();
     }

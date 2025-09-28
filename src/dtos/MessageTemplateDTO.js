@@ -8,19 +8,16 @@ class MessageTemplateDTO {
         this.updated_at = data.updated_at;
     }
 
-    // Створити DTO з моделі
     static fromModel(model) {
         if (!model) return null;
         return new MessageTemplateDTO(model.toJSON ? model.toJSON() : model);
     }
 
-    // Створити масив DTO з масиву моделей
     static fromModelArray(models) {
         if (!Array.isArray(models)) return [];
         return models.map(model => this.fromModel(model));
     }
 
-    // Валідація даних для створення
     static validateCreate(data) {
         const errors = [];
         
@@ -42,7 +39,6 @@ class MessageTemplateDTO {
         };
     }
 
-    // Валідація даних для оновлення
     static validateUpdate(data) {
         const errors = [];
         
@@ -64,7 +60,6 @@ class MessageTemplateDTO {
         };
     }
 
-    // Замінити плейсхолдери в шаблоні
     replacePlaceholders(userData) {
         let content = this.content;
         let subject = this.subject;
@@ -88,7 +83,6 @@ class MessageTemplateDTO {
         };
     }
 
-    // Отримати повне ім'я користувача
     getFullName(userData) {
         const parts = [userData.last_name, userData.first_name];
         if (userData.middle_name) {
@@ -97,13 +91,11 @@ class MessageTemplateDTO {
         return parts.join(' ');
     }
 
-    // Перевірити наявність плейсхолдерів
     hasPlaceholders() {
         const placeholderRegex = /\{\{[^}]+\}\}/g;
         return placeholderRegex.test(this.content) || placeholderRegex.test(this.subject);
     }
 
-    // Отримати список плейсхолдерів
     getPlaceholders() {
         const placeholderRegex = /\{\{[^}]+\}\}/g;
         const contentPlaceholders = this.content.match(placeholderRegex) || [];
@@ -112,7 +104,6 @@ class MessageTemplateDTO {
         return [...new Set([...contentPlaceholders, ...subjectPlaceholders])];
     }
 
-    // Перетворити в об'єкт для API відповіді
     toJSON() {
         return {
             id: this.id,

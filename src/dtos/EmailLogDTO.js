@@ -11,24 +11,20 @@ class EmailLogDTO {
         this.created_at = data.created_at;
         this.updated_at = data.updated_at;
         
-        // Додаткові дані зі зв'язаних моделей
         this.email_address = data.email_address;
         this.template = data.template;
     }
 
-    // Створити DTO з моделі
     static fromModel(model) {
         if (!model) return null;
         return new EmailLogDTO(model.toJSON ? model.toJSON() : model);
     }
 
-    // Створити масив DTO з масиву моделей
     static fromModelArray(models) {
         if (!Array.isArray(models)) return [];
         return models.map(model => this.fromModel(model));
     }
 
-    // Створити DTO з результату findAndCountAll
     static fromFindAndCountAllResult(result) {
         return {
             data: this.fromModelArray(result.rows),
@@ -38,7 +34,6 @@ class EmailLogDTO {
         };
     }
 
-    // Валідація даних для створення
     static validateCreate(data) {
         const errors = [];
         
@@ -64,7 +59,6 @@ class EmailLogDTO {
         };
     }
 
-    // Отримати статус з іконкою
     getStatusWithIcon() {
         const statusIcons = {
             pending: '⏳',
@@ -75,7 +69,6 @@ class EmailLogDTO {
         return `${statusIcons[this.status] || '❓'} ${this.status.toUpperCase()}`;
     }
 
-    // Отримати час відправки
     getSentTime() {
         if (this.sent_at) {
             return new Date(this.sent_at).toLocaleString();
@@ -83,17 +76,14 @@ class EmailLogDTO {
         return null;
     }
 
-    // Отримати час створення
     getCreatedTime() {
         return new Date(this.created_at).toLocaleString();
     }
 
-    // Перевірити чи є помилка
     hasError() {
         return this.status === 'failed' && this.error_message;
     }
 
-    // Отримати ім'я отримувача
     getRecipientName() {
         if (this.email_address) {
             const parts = [this.email_address.last_name, this.email_address.first_name];
@@ -105,17 +95,14 @@ class EmailLogDTO {
         return 'Unknown';
     }
 
-    // Отримати email отримувача
     getRecipientEmail() {
         return this.email_address ? this.email_address.email : 'Unknown';
     }
 
-    // Отримати назву шаблону
     getTemplateName() {
         return this.template ? this.template.name : 'Custom';
     }
 
-    // Перетворити в об'єкт для API відповіді
     toJSON() {
         return {
             id: this.id,
